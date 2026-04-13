@@ -38,10 +38,32 @@ import MotionBar from './components/MotionBar';
 dayjs.extend(relativeTime);
 
 const useStyles = makeStyles()((theme) => ({
+  row: {
+    borderBottom: '1px solid #f0f0f0',
+    '&:hover': {
+      backgroundColor: '#f8f9fa',
+    },
+  },
+  listItem: {
+    padding: theme.spacing(1.5, 2),
+  },
+  avatar: {
+    backgroundColor: theme.palette.primary.main,
+    width: 40,
+    height: 40,
+  },
   icon: {
-    width: '25px',
-    height: '25px',
+    width: '22px',
+    height: '22px',
     filter: 'brightness(0) invert(1)',
+  },
+  primaryText: {
+    fontWeight: 600,
+    fontSize: '0.9rem',
+    color: '#2d3436',
+  },
+  secondaryText: {
+    fontSize: '0.8rem',
   },
   batteryText: {
     fontSize: '0.75rem',
@@ -61,7 +83,8 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.neutral.main,
   },
   selected: {
-    backgroundColor: theme.palette.action.selected,
+    backgroundColor: '#e3f2fd !important',
+    borderLeft: `3px solid ${theme.palette.primary.main}`,
   },
 }));
 
@@ -118,16 +141,16 @@ const DeviceRow = ({ devices, index, style }) => {
   };
 
   return (
-    <div style={style}>
+    <div style={style} className={classes.row}>
       <ListItemButton
         key={item.id}
         onClick={() => dispatch(devicesActions.selectId(item.id))}
         disabled={!admin && item.disabled}
         selected={selectedDeviceId === item.id}
-        className={selectedDeviceId === item.id ? classes.selected : null}
+        className={`${classes.listItem} ${selectedDeviceId === item.id ? classes.selected : ''}`}
       >
         <ListItemAvatar>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <img className={classes.icon} src={mapIcons[mapIconKey(item.category)]} alt="" />
           </Avatar>
         </ListItemAvatar>
@@ -139,8 +162,8 @@ const DeviceRow = ({ devices, index, style }) => {
             secondary: Typography,
           }}
           slotProps={{
-            primary: { noWrap: true },
-            secondary: { noWrap: true },
+            primary: { noWrap: true, className: classes.primaryText },
+            secondary: { noWrap: true, className: classes.secondaryText },
           }}
         />
         {position && (

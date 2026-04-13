@@ -7,9 +7,10 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 export default defineConfig(() => ({
   server: {
     port: 3000,
+    allowedHosts: ['originative-lissome-chas.ngrok-free.dev'],
     proxy: {
-      '/api/socket': 'ws://localhost:8082',
-      '/api': 'http://localhost:8082',
+      '/api/socket': 'ws://185.53.211.11:8082',
+      '/api': 'http://185.53.211.11:8082',
     },
   },
   build: {

@@ -1,57 +1,81 @@
-import { useMediaQuery, Paper } from '@mui/material';
+import { Paper, Box } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
-import { useTheme } from '@mui/material/styles';
-import LogoImage from './LogoImage';
 
 const useStyles = makeStyles()((theme) => ({
   root: {
     display: 'flex',
-    height: '100%',
-  },
-  sidebar: {
-    display: 'flex',
-    justifyContent: 'center',
+    height: '100vh',
+    width: '100vw',
     alignItems: 'center',
-    background: theme.palette.primary.main,
-    paddingBottom: theme.spacing(5),
-    width: theme.dimensions.sidebarWidth,
-    [theme.breakpoints.down('lg')]: {
-      width: theme.dimensions.sidebarWidthTablet,
+    justifyContent: 'center',
+    background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 50%, ${theme.palette.secondary.main} 100%)`,
+    position: 'relative',
+    overflow: 'hidden',
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      width: '600px',
+      height: '600px',
+      borderRadius: '50%',
+      background: 'rgba(255,255,255,0.05)',
+      top: '-150px',
+      left: '-150px',
     },
-    [theme.breakpoints.down('sm')]: {
-      width: '0px',
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      width: '400px',
+      height: '400px',
+      borderRadius: '50%',
+      background: 'rgba(255,255,255,0.05)',
+      bottom: '-100px',
+      right: '-100px',
     },
   },
-  paper: {
+  card: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
-    boxShadow: '-2px 0px 16px rgba(0, 0, 0, 0.25)',
-    [theme.breakpoints.up('lg')]: {
-      padding: theme.spacing(0, 25, 0, 0),
+    padding: theme.spacing(5, 5, 4, 5),
+    borderRadius: '20px',
+    boxShadow: '0 24px 60px rgba(0,0,0,0.35)',
+    width: '100%',
+    maxWidth: '420px',
+    backdropFilter: 'blur(10px)',
+    background: 'rgba(255,255,255,0.97)',
+    zIndex: 1,
+    [theme.breakpoints.down('sm')]: {
+      margin: theme.spacing(2),
+      padding: theme.spacing(4, 3),
     },
   },
+  logoWrapper: {
+    marginBottom: theme.spacing(3),
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  logo: {
+    maxWidth: '200px',
+    maxHeight: '100px',
+    width: 'auto',
+    height: 'auto',
+    objectFit: 'contain',
+  },
   form: {
-    maxWidth: theme.spacing(52),
-    padding: theme.spacing(5),
     width: '100%',
   },
 }));
 
 const LoginLayout = ({ children }) => {
   const { classes } = useStyles();
-  const theme = useTheme();
 
   return (
     <main className={classes.root}>
-      <div className={classes.sidebar}>
-        {!useMediaQuery(theme.breakpoints.down('lg')) && (
-          <LogoImage color={theme.palette.secondary.contrastText} />
-        )}
-      </div>
-      <Paper className={classes.paper}>
+      <Paper className={classes.card} elevation={0}>
+        {/* <Box className={classes.logoWrapper}>
+          <img src="/tera_logo.png" alt="Tera Logo" className={classes.logo} />
+        </Box> */}
         <form className={classes.form}>{children}</form>
       </Paper>
     </main>
