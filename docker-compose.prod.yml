@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: middleware-frontend:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: middleware-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - middleware-network
+
+networks:
+  middleware-network:
+    driver: bridge
