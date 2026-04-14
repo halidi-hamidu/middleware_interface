@@ -230,9 +230,10 @@ const MainPage = () => {
       </Box>
 
       <EventsDrawer open={eventsOpen} onClose={() => setEventsOpen(false)} />
-      {selectedDeviceId && (
+      {/* Device details popup - hidden as per user request */}
+      {/* {selectedDeviceId && (
         <StatusCard deviceId={selectedDeviceId} position={selectedPosition} onClose={() => dispatch(devicesActions.selectId(null))} desktopPadding={DEVICE_PANEL_WIDTH + 'px'} />
-      )}
+      )} */}
     </Box>
   );
 };
