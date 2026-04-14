@@ -178,7 +178,7 @@ const MainPage = () => {
     <Box className={classes.root}>
       <AppBar position="fixed" className={classes.appBar} elevation={0}>
         <Toolbar className={classes.appBarToolbar}>
-          <img src="/tera_logo.png" alt="Tera" className={classes.logo} />
+          {/* <img src="/tera_logo.png" alt="Tera" className={classes.logo} /> */}
           <Typography className={classes.pageTitle}>{t('mapTitle')}</Typography>
           <Tooltip title="Events">
             <IconButton size="small" onClick={onEventsClick} sx={{ color: '#555' }}>
